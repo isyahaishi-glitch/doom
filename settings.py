@@ -1,2 +1,8 @@
 RES = WIDTH,HEIGHT = 1366,768
 FPS = 60
+TILE =64
+
+Player_POS = 1.5, 5
+Player_ANGLE = 0
+Player_SPEED = 0.004
+Player_ROT_SPEED = 0.002
