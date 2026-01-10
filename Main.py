@@ -4,7 +4,7 @@ from settings import *
 from map import *
 from Player import *
 from settings import Player_POS
-
+from raycasting import*
 class Game():
     def __init__(self):
         pg.init()
@@ -16,9 +16,11 @@ class Game():
     def new_game(self) :
         self.map = Map(self)
         self.player = Player(self)
+        self.raycasting = RayCasting(self)
 
     def update(self) :
         self.player.update()
+        self.raycasting.update()
         pg.display.flip()
         self.delta_time = self.clock.tick(FPS)
         pg.display.set_caption(f'{self.clock.get_fps() :.1f}')
