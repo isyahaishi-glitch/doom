@@ -44,8 +44,11 @@ class RayCasting :
 
         Ray_angle = self.game.player.angle - HALF_FOV + 0.0001
         for ray in range(NUM_RAYS):
-            sin_a = math.sin(Ray_angle)
-            cos_a = math.cos(Ray_angle)
+            sin_a = math.sin(Ray_angle) or 0.000001
+            cos_a = math.cos(Ray_angle) or 0.000001
+
+            texture_hor = 1
+            texture_vert = 1
 
             y_hor,dy =(y_map + 1, 1)if sin_a > 0 else(y_map - 1e-6, -1)
 
