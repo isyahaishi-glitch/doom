@@ -60,15 +60,16 @@ class RayCasting :
             ray_x = (ox + depth * cos_a) * TILE
             ray_y = (oy + depth * sin_a) * TILE
 
-            pg.draw.line(
-            self.game.screen,
-            'yellow',
-            (px, py),
-            (ray_x, ray_y),
-            2
-        )
 
-            Ray_angle += DELTA_ANGEL
+            depth *= math.cos(self.game.player.angle - Ray_angle)
+
+            proj_height = SCREEN_DIST /(depth + 0.0001)
+
+            color = [255 /(1 + depth ** 5 * 0.00002)] * 3
+            pg.draw.rect(self.game.screen, color,
+                         (ray * SCALE, HALF_HEIGHT - proj_height //2,SCALE, proj_height))
+
+            Ray_angle += DELTA_ANGLE
 
     def update(self):
         self.ray_cast( )
