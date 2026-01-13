@@ -1,12 +1,21 @@
 from settings import *
 import pygame as pg
 import math
+from sound import *
 
 class Player:
     def __init__(self, game):
         self.game = game
         self.x, self.y = Player_POS
         self.angle = Player_ANGLE
+        self.shot = False
+
+    def single_fire_event(self,event):
+        if event.type == pg.MOUSEBUTTONDOWN:
+            if event.button == 1 and not self.shot and not self.game.weapon.reloading:
+                self.game.sound.shotgun.play()
+                self.shot = True
+                self.game.weapon.reloading = True
 
     def movement(self):
         sin_a =math.sin (self.angle)
