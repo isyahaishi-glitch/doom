@@ -1,7 +1,7 @@
 from sprite_object import *
 
 class Weapon (AnimatedSprite):
-    def __init__(self, game, path='', scale=0.8,  animation_time=120):
+    def __init__(self, game, path='resources/sprites/weapon/0.png', scale=0.4,  animation_time=120):
         super().__init__(game=game, path=path , scale=scale,  animation_time = animation_time)
 
         self.images = deque(
