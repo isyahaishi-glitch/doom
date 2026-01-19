@@ -23,7 +23,7 @@ class NPC(AnimatedSprite):
         self.size= 10
         self.health= 100
         self.attack_damage = 15
-        self.accuracy=0.015
+        self.accuracy=0.15
         self.alive =True
         self.pain = False
         self.ray_cast_value = False
@@ -34,7 +34,7 @@ class NPC(AnimatedSprite):
         self.check_animation_time()
         self.get_sprite()
         self.run_logic()
-        self.draw_ray_cast()
+        # self.draw_ray_cast()
 
     def check_wall(self, x,y):
         return(x,y) not in self.game.map.world_map
@@ -51,11 +51,18 @@ class NPC(AnimatedSprite):
         next_pos = self.game.pathfinding.get_path(self.map_pos,self.game.player.map_pos)
         next_x , next_y = next_pos
 
-        pg.draw.rect(self.game.screen, 'blue',(100 * next_x,100 * next_y,100,100))
-        angle = math.atan2(next_y + 0.5 - self.y,next_x + 0.5 - self.x)
-        dx = math.cos(angle) * self.speed
-        dy = math.sin(angle) * self.speed
-        self.check_collision(dx,dy)
+        # pg.draw.rect(self.game.screen, 'blue',(TILE * next_x,TILE * next_y,TILE,TILE))
+        if next_pos not in self.game.object_handler.npc_position:
+            angle = math.atan2(next_y + 0.5 - self.y,next_x + 0.5 - self.x)
+            dx = math.cos(angle) * self.speed
+            dy = math.sin(angle) * self.speed
+            self.check_collision(dx,dy)
+
+    def attack(self):
+        if self.animation_trigger:
+            self.game.sound.npc_attack.play()
+            if random() < self.accuracy:
+                self.game.player.get_damage(self.attack_damage)
 
     def animate_death(self):
         if not self.alive:
@@ -94,10 +101,15 @@ class NPC(AnimatedSprite):
                 self.animated_pain ()
             elif self.ray_cast_value:
                 self.player_search_trigger = True
-                self.animate(self.walk_image)
-                self.movement()
+                if self.dist < self.attack_dist:
+                    self.animate(self.attack_image)
+                    self.attack()
+
+                else:
+                    self.animate(self.walk_image)
+                    self.movement()
             
-            elif self.ray_cast_value:
+            elif self.player_search_trigger:
                 self.animate(self.walk_image)
                 self.movement()
             
@@ -183,10 +195,10 @@ class NPC(AnimatedSprite):
     
 
     def draw_ray_cast(self):
-        pg.draw.circle(self.game.screen,'red',(100 * self.x,100 * self.y), 15)
+        pg.draw.circle(self.game.screen,'red',(TILE * self.x,TILE * self.y), 15)
         if self.ray_cast_player_npc():
-            pg.draw.line(self.game.screen, 'orange',(100 * self.game.player.x,100 * self.game.player.y),
-                         (100 * self.x , 100 * self.y), 2)
+            pg.draw.line(self.game.screen, 'orange',(TILE * self.game.player.x,TILE * self.game.player.y),
+                         (TILE * self.x , TILE * self.y), 2)
             # if depth_vert < depth_hor:
             #     depth ,texture = depth_vert ,texture_vert
             #     y_vert %= 1

@@ -5,7 +5,7 @@ class PathFinding:
     def __init__(self , game):
         self.game = game
         self.map = game.map.mini_map
-        self.ways = [-1,0],[0,-1],[1,0],[0,1],[-1,-1],[1,-1],[1,1],[-1,1]
+        self.ways = [(-1, 0), (0, -1), (1, 0), (0, 1),(-1, -1), (1, -1), (1, 1), (-1, 1)]
         self.graph = {}
         self.get_graph()
 
@@ -27,10 +27,10 @@ class PathFinding:
             cur_node = queue.popleft()
             if cur_node == goal :
                 break
-            next_node = graph[cur_node]
+            next_nodes = graph[cur_node]
 
-            for next_node in next_node:
-                if next_node not in visited:
+            for next_node in next_nodes:
+                if next_node not in visited and next_node not in  self.game.object_handler.npc_position:
                     queue.append(next_node)
                     visited[next_node] = cur_node
         return visited
