@@ -10,7 +10,9 @@ from sprite_object import *
 from object_handler import *
 from weapon import *
 from sound import *
+
 from pathfinding import*
+
 
 class Game():
     def __init__(self):
@@ -26,7 +28,6 @@ class Game():
         self.global_event = pg.USEREVENT + 0
         pg.time.set_timer(self.global_event, 40)
         self.new_game()
-
     def new_game(self) :
         self.map = Map(self)
         self.player = Player(self)
@@ -38,6 +39,7 @@ class Game():
         self.weapon = Weapon(self)
         self.sound = Sound(self)
         self.pathfinding = PathFinding(self)
+        pg.mixer.music.play(-1)
 
     def update(self) :
         self.player.update()

@@ -26,11 +26,32 @@ class ObjectHandler:
         add_sprite(AnimatedSprite(game, path=self.anim_sprites_path + '/red_light/0.png',pos=(12.5,1.5)))
         add_sprite(AnimatedSprite(game, path=self.anim_sprites_path + '/red_light/0.png',pos=(9.5,7.5)))
 
-        add_npc(NPC(game))
-        add_npc(NPC(game, pos=(11.5,4.5)))
-        add_npc(NPC(game, pos=(11.5,2.5)))
-        add_npc(CacoDemonNPC(game, pos=(11.5,3.5)))
-        add_npc(CyberDemonNPC(game, pos=(11.5,4.5)))
+        # add_npc(NPC(game))
+        # add_npc(NPC(game, pos=(11.5,4.5)))
+        # add_npc(NPC(game, pos=(11.5,2.5)))
+        add_npc(SoldierNPC(game,pos=(7, 18) ))
+        add_npc(SoldierNPC(game,pos= (12, 18)))
+        add_npc(SoldierNPC(game,pos= (6, 21)))
+        add_npc(SoldierNPC(game,pos= (9, 21)))
+        add_npc(SoldierNPC(game,pos= (12, 21)))
+        add_npc(SoldierNPC(game,pos= (14, 21)))
+        add_npc(SoldierNPC(game,pos= (6, 35)))
+        add_npc(SoldierNPC(game,pos= (19, 36)))
+        add_npc(SoldierNPC(game,pos= (12, 38)))
+        add_npc(SoldierNPC(game,pos= (18, 39)))
+        add_npc(SoldierNPC(game,pos= (5, 40)))
+        add_npc(SoldierNPC(game,pos= (22, 41)))
+
+
+
+        add_npc(CacoDemonNPC(game, pos=(8,18)))
+        add_npc(CacoDemonNPC(game, pos=(11,18)))
+        add_npc(CacoDemonNPC(game, pos=(7,23)))
+        add_npc(CacoDemonNPC(game, pos=(13,23)))
+
+        add_npc(CyberDemonNPC(game, pos=(9,3)))
+        add_npc(CyberDemonNPC(game, pos=(12,3)))
+
 
         
 

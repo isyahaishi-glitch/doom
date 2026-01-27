@@ -6,7 +6,7 @@ HALF_WIDTH = WIDTH //2
 HALF_HEIGHT = HEIGHT //2
 TILE =64
 
-Player_POS = 1.5, 5
+Player_POS = 12.5, 49
 Player_ANGLE = 0
 Player_SPEED = 0.004
 Player_ROT_SPEED = 0.002
